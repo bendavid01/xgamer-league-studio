@@ -26,8 +26,19 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'team' }],
       options: {
-        filter: 'group == $group',
-        filterParams: { group: (document: any) => document.group } as any
+        filter: ({ document }: any) => {
+          if (!document.group) {
+            return {
+              filter: '!defined(group)' // Return teams with no group or handle as needed, or just return all? 
+              // Actually better to just return nothing if no group selected, but group is required.
+              // Let's trying falling back to a dummy query or ensuring group exists.
+            }
+          }
+          return {
+            filter: 'group == $group',
+            params: { group: document.group }
+          }
+        }
       },
       validation: Rule => Rule.required()
     }),
@@ -37,11 +48,17 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'team' }],
       options: {
-        filter: 'group == $group && _id != $homeTeamId',
-        filterParams: {
-          group: (document: any) => document.group,
-          homeTeamId: (document: any) => document.homeTeam?._ref
-        } as any
+        filter: ({ document }: any) => {
+          if (!document.group) return { filter: '_id == "nothing"' };
+
+          return {
+            filter: 'group == $group && _id != $homeTeamId',
+            params: {
+              group: document.group,
+              homeTeamId: document.homeTeam?._ref || "nothing"
+            }
+          }
+        }
       },
       // ✅ FIXED: Using 'any' to prevent TypeScript crashes
       validation: Rule => Rule.required().custom((value, context) => {
@@ -61,6 +78,16 @@ export default defineType({
       options: { list: ['A', 'B'], layout: 'radio' },
       initialValue: 'A',
       validation: Rule => Rule.required()
+    }),
+    defineField({
+      name: 'stage',
+      title: 'Stage',
+      type: 'string',
+      options: {
+        list: ['Group Stage', 'Knockout Stage'],
+        layout: 'radio'
+      },
+      initialValue: 'Group Stage'
     }),
     defineField({
       name: 'status',
