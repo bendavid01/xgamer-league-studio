@@ -7,44 +7,39 @@ export default defineType({
   fields: [
     defineField({
       name: 'name',
-      title: 'Team Name', // e.g. "Cyber United"
+      title: 'Player Name / Team Name',
       type: 'string',
-    }),
-    // ✅ NEW FIELD: This lets you add the Gamer Tag separately
-    defineField({
-      name: 'player',
-      title: 'Player Name / Gamer Tag', // e.g. "Alex_Viper"
-      type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'logo',
-      title: 'Logo',
-      type: 'image',
+      name: 'group',
+      title: 'Group',
+      type: 'string',
       options: {
-        hotspot: true,
+        list: [
+          { title: 'Group A', value: 'A' },
+          { title: 'Group B', value: 'B' },
+        ],
+        layout: 'radio',
       },
+      initialValue: 'A',
     }),
-    // Stats
-    defineField({ name: 'played', title: 'Played', type: 'number', initialValue: 0 }),
-    defineField({ name: 'won', title: 'Won', type: 'number', initialValue: 0 }),
-    defineField({ name: 'drawn', title: 'Drawn', type: 'number', initialValue: 0 }),
-    defineField({ name: 'lost', title: 'Lost', type: 'number', initialValue: 0 }),
-    defineField({ name: 'gf', title: 'Goals For', type: 'number', initialValue: 0 }),
-    defineField({ name: 'ga', title: 'Goals Against', type: 'number', initialValue: 0 }),
-    defineField({ name: 'pts', title: 'Points', type: 'number', initialValue: 0 }),
+    defineField({
+      name: 'squad',
+      title: 'Squad List (Optional)',
+      type: 'array',
+      of: [{ type: 'string' }],
+    }),
   ],
   preview: {
     select: {
       title: 'name',
-      subtitle: 'player', // ✅ Preview will now show "Cyber United" above "Alex_Viper"
-      media: 'logo',
+      subtitle: 'group',
     },
-    prepare(selection) {
-      const { title, subtitle, media } = selection
+    prepare({ title, subtitle }) {
       return {
         title: title,
-        subtitle: subtitle ? `@${subtitle}` : 'No Player Assigned',
-        media: media,
+        subtitle: `Group ${subtitle}`,
       }
     },
   },
