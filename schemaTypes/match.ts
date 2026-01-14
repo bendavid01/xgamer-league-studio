@@ -13,7 +13,7 @@ export default defineType({
       status: 'status'
     },
     prepare({ home, away, scoreA, scoreB, status }) {
-      return { 
+      return {
         title: `${home || 'TBD'} vs ${away || 'TBD'}`,
         subtitle: status === 'completed' ? `${scoreA} - ${scoreB}` : status
       };
@@ -42,12 +42,7 @@ export default defineType({
         return true;
       })
     }),
-    defineField({
-      name: 'date',
-      title: 'Match Date',
-      type: 'datetime',
-      // ✅ FIXED: REMOVED validation. It is now optional.
-    }),
+
     defineField({
       name: 'group',
       title: 'Group Stage',
