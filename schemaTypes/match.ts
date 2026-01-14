@@ -25,6 +25,10 @@ export default defineType({
       title: 'Home Team',
       type: 'reference',
       to: [{ type: 'team' }],
+      options: {
+        filter: 'group == $group',
+        filterParams: { group: (document: any) => document.group } as any
+      },
       validation: Rule => Rule.required()
     }),
     defineField({
@@ -32,6 +36,13 @@ export default defineType({
       title: 'Away Team',
       type: 'reference',
       to: [{ type: 'team' }],
+      options: {
+        filter: 'group == $group && _id != $homeTeamId',
+        filterParams: {
+          group: (document: any) => document.group,
+          homeTeamId: (document: any) => document.homeTeam?._ref
+        } as any
+      },
       // ✅ FIXED: Using 'any' to prevent TypeScript crashes
       validation: Rule => Rule.required().custom((value, context) => {
         const homeRef = (context.document as any)?.homeTeam?._ref;
