@@ -20,7 +20,8 @@ export default defineType({
       name: 'match',
       title: 'Related Match',
       type: 'reference',
-      to: [{ type: 'match' }]
+      to: [{ type: 'match' }],
+      weak: true
     }),
     defineField({
       name: 'timestamp',
