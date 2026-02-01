@@ -17,6 +17,7 @@ export default defineType({
           { title: 'Match Published', value: 'MATCH_PUBLISHED' },
           { title: 'Match Deleted', value: 'MATCH_DELETED' },
           { title: 'Match Created', value: 'MATCH_CREATED' },
+          { title: 'Match Updated', value: 'MATCH_UPDATED' },
           { title: 'Team Created', value: 'TEAM_CREATED' },
           { title: 'Team Updated', value: 'TEAM_UPDATED' },
           { title: 'Team Deleted', value: 'TEAM_DELETED' },

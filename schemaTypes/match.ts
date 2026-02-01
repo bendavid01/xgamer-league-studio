@@ -114,6 +114,15 @@ export default defineType({
       title: 'Away Score',
       type: 'number',
       initialValue: 0
+    }),
+    // Soft delete: when true, match is excluded from all queries. No hard deletes.
+    // WHY: auditLog references matches; hard delete would cascade or fail.
+    defineField({
+      name: 'deleted',
+      title: 'Deleted',
+      type: 'boolean',
+      initialValue: false,
+      hidden: ({ document }) => !document?.deleted,
     })
   ]
 })
