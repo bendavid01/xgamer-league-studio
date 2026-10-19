@@ -1,6 +1,6 @@
 # X-Gamer Pro League — Content Studio
 
-The headless CMS backend for X-Gamer Pro League, built with **Sanity Studio**. This repo manages all structured content for the league — matches, standings, team data, rules, and announcements.
+The headless CMS backend for X-Gamer Pro League, built with **Sanity Studio**. This repo is the Content Manager (CM) for existing season matches, team data and editorial content. Organizer Manager (OM) handles private registration and tournament operations separately.
 
 **Frontend repo:** [xgamer-league-web](https://github.com/bendavid01/xgamer-league-web)
 
@@ -74,3 +74,9 @@ npm run dev
 ---
 
 *Part of the X-Gamer Pro League project — a personal full-stack build using Next.js and Sanity CMS.*
+
+## Phase 1: CM and OM boundaries
+
+CM is the Sanity editorial workspace. Keep existing documents, season logic and audit records here. The separately authenticated OM route in the cloud-hosted web app manages applications, verification, operational announcements, tournament actions and scoped roles. It does not run on a personal laptop. Current operational announcements are stored in PostgreSQL and displayed by the web app; adding or publishing content in Sanity does not automatically create those announcements.
+
+The OM link still targets the existing production address. This review branch does not deploy or enable that service. Review the web Phase 1 branch and configure a safe preview before production promotion. Sanity membership does not grant OM access. Two main admins and coordinator permissions are enforced by OM independently of Sanity roles. Studio permissions and webhook audit delivery still require service-level verification before granting coordinators write access.

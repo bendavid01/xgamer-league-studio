@@ -7,13 +7,13 @@ import {ControlCenterTool} from './tools/controlCenter'
 
 export default defineConfig({
   name: 'default',
-  title: 'xgamer-studio',
+  title: 'XGamer Content Manager (CM)',
 
   projectId: 'aqtsgm5o',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
-  tools: [{name:'control-center',title:'Control Center',component:ControlCenterTool}],
+  tools: [{name:'control-center',title:'Organizer Manager (OM)',component:ControlCenterTool}],
 
   schema: {
     types: schemaTypes,
