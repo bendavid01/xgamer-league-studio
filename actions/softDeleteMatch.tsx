@@ -5,9 +5,9 @@
  * Example patch (API/CLI):
  *   client.patch(matchId).set({ deleted: true }).commit()
  */
-import { useDocumentOperation } from 'sanity'
+import { useDocumentOperation, type DocumentActionComponent } from 'sanity'
 
-export function SoftDeleteMatchAction(props: { id: string; type: string; onComplete: () => void }) {
+export const SoftDeleteMatchAction: DocumentActionComponent = (props) => {
   const { patch, publish } = useDocumentOperation(props.id, props.type)
 
   if (props.type !== 'match') return null
@@ -17,7 +17,7 @@ export function SoftDeleteMatchAction(props: { id: string; type: string; onCompl
     action: 'delete',
     label: 'Delete',
     tone: 'critical' as const,
-    disabled: !patch || patch.disabled,
+    disabled: !patch || Boolean(patch.disabled),
     onHandle: () => {
       // Patch deleted: true instead of actually deleting
       patch.execute([{ set: { deleted: true } }])

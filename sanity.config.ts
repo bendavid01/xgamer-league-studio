@@ -3,6 +3,7 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {SoftDeleteMatchAction} from './actions/softDeleteMatch'
+import {ControlCenterTool} from './tools/controlCenter'
 
 export default defineConfig({
   name: 'default',
@@ -12,6 +13,7 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
+  tools: [{name:'control-center',title:'Control Center',component:ControlCenterTool}],
 
   schema: {
     types: schemaTypes,
