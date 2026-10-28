@@ -80,3 +80,19 @@ npm run dev
 CM is the Sanity editorial workspace. Keep existing documents, season logic and audit records here. The separately authenticated OM route in the cloud-hosted web app manages applications, verification, operational announcements, tournament actions and scoped roles. It does not run on a personal laptop. Current operational announcements are stored in PostgreSQL and displayed by the web app; adding or publishing content in Sanity does not automatically create those announcements.
 
 The OM link still targets the existing production address. This review branch does not deploy or enable that service. Review the web Phase 1 branch and configure a safe preview before production promotion. Sanity membership does not grant OM access. Two main admins and coordinator permissions are enforced by OM independently of Sanity roles. Studio permissions and webhook audit delivery still require service-level verification before granting coordinators write access.
+
+---
+
+## Editing website content (CM)
+
+The Studio sidebar is grouped for organizers:
+
+| Sidebar item | Shows on the website | Notes |
+|---|---|---|
+| **Tournaments** | Homepage "Tournament format" block and `/tournament` | Tick **Show on homepage** on one tournament only. Status controls the main button. Empty date, fee or prize fields are hidden on the site. |
+| **Announcements** | Homepage "Announcements" and `/tournament` | Pin important updates. Never include phone numbers or room codes. |
+| **Rules page** | `/rules` | Single page. Until it is published, the website keeps its built-in rules. |
+| **FAQ** | `/rules` (bottom) | Lower order number appears first. |
+| League season — players / matches | Existing league pages | Unchanged workflow; matches use soft delete. |
+
+Nothing appears on the website until you press **Publish**. Live slot counts and private player data come from OM, never from Sanity.
