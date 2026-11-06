@@ -2,7 +2,7 @@
 
 Private applications, contact data, OAuth identities, coordinator assignments and finals credentials live only in the web application's private PostgreSQL database. Do not add these fields to the public production Sanity dataset.
 
-The existing Sanity dataset and content remain unchanged. The Control Center is at https://xgamer-league-web.vercel.app/admin. Registration and organizer access remain closed until the owner configures the database, Discord OAuth and exactly two main admin Discord IDs.
+The existing Sanity dataset and content remain unchanged. The Control Center is at https://xgamerproleague.vercel.app/admin. Registration and organizer access remain closed until the owner configures the database, Discord OAuth and exactly two main admin Discord IDs.
 
 ## Sanity permissions are a separate security boundary
 
